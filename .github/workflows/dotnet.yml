@@ -32,9 +32,9 @@ jobs:
       run: dotnet test --no-build --verbosity normal
       
     - name: Pack
-      working-directory: ./src/NW.UnivariateForecasting/
-      run: dotnet pack --configuration Release NW.UnivariateForecasting.csproj
+      working-directory: ./src/NW.Shared.Validation/
+      run: dotnet pack --configuration Release NW.Shared.Validation.csproj
 
     - name: Push to NuGet.org
-      working-directory: ./src/NW.UnivariateForecasting/bin/Release/
+      working-directory: ./src/NW.Shared.Validation/bin/Release/
       run: dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate 
