@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <Version>1.0.0</Version>
+    <Authors>numbworks</Authors>
+    <Copyright>numbworks 2024</Copyright>
+    <PackageProjectUrl>https://github.com/numbworks/NW.Shared.Validation</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/numbworks/NW.Shared.Validation</RepositoryUrl>
+    <PackageTags>csharp library validation</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="NUnit" Version="4.0.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
+    <PackageReference Include="coverlet.collector" Version="6.0.0" />
+  </ItemGroup>
+
+</Project>
