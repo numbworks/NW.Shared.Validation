@@ -227,6 +227,44 @@ namespace NW.Shared.Validation.UnitTests
                 ).SetArgDisplayNames($"{nameof(throwIfLessThanOneExceptionTestCases)}_02")
 
         };
+        private static TestCaseData[] throwIfLessThanExceptionTestCases =
+        {
+
+            // ThrowIfLessThan<T>
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ThrowIfLessThan<Exception>((int)0, (int)1, ObjectMother.VariableName_N1)
+                    ),
+                typeof(Exception),
+                MessageCollection.VariableCantBeLessThan(ObjectMother.VariableName_N1, 1)
+                ).SetArgDisplayNames($"{nameof(throwIfLessThanExceptionTestCases)}_01"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ThrowIfLessThan<Exception>((double)0, (double)1, ObjectMother.VariableName_N1)
+                    ),
+                typeof(Exception),
+                MessageCollection.VariableCantBeLessThan(ObjectMother.VariableName_N1, 1)
+                ).SetArgDisplayNames($"{nameof(throwIfLessThanExceptionTestCases)}_02"),
+
+            // ThrowIfLessThan
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ThrowIfLessThan((int)0, (int)1, ObjectMother.VariableName_N1)
+                    ),
+                typeof(ArgumentException),
+                MessageCollection.VariableCantBeLessThan(ObjectMother.VariableName_N1, 1)
+                ).SetArgDisplayNames($"{nameof(throwIfLessThanExceptionTestCases)}_03"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ThrowIfLessThan((double)0, (double)1, ObjectMother.VariableName_N1)
+                    ),
+                typeof(ArgumentException),
+                MessageCollection.VariableCantBeLessThan(ObjectMother.VariableName_N1, 1)
+                ).SetArgDisplayNames($"{nameof(throwIfLessThanExceptionTestCases)}_04")
+
+        };
         private static TestCaseData[] throwIfFirstIsGreaterExceptionTestCases =
         {
 
@@ -358,6 +396,11 @@ namespace NW.Shared.Validation.UnitTests
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
+        [TestCaseSource(nameof(throwIfLessThanExceptionTestCases))]
+        public void ThrowIfLessThan_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
         [TestCaseSource(nameof(throwIfFirstIsGreaterExceptionTestCases))]
         public void ThrowIfFirstIsGreater_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
@@ -437,6 +480,26 @@ namespace NW.Shared.Validation.UnitTests
             => Method_ShouldDoNothing_WhenProperArgument(
                     new Action[] {
                         () => Validator.ThrowIfLessThanOne(ObjectMother.Value, nameof(ObjectMother.Value))
+                    });
+
+        [Test]
+        public void ThrowIfLessThan_ShouldDoNothing_WhenProperArgumentAndInteger()
+            => Method_ShouldDoNothing_WhenProperArgument(
+                    new Action[] {
+                        () => Validator.ThrowIfLessThan(
+                                (int)ObjectMother.Value, 
+                                (int)ObjectMother.Value, 
+                                nameof(ObjectMother.Value))
+                    });
+
+        [Test]
+        public void ThrowIfLessThan_ShouldDoNothing_WhenProperArgumentAndDouble()
+            => Method_ShouldDoNothing_WhenProperArgument(
+                    new Action[] {
+                        () => Validator.ThrowIfLessThan(
+                                (double)ObjectMother.Value,
+                                (double)ObjectMother.Value,
+                                nameof(ObjectMother.Value))
                     });
 
         [Test]
